@@ -19,7 +19,16 @@ public class AuthorBean implements Serializable {
 
     @EJB
     AuthorFacade authorFacade;
+private String choice;
 
+    public String getChoice() {
+        return choice;
+    }
+
+    public void setChoice(String choice) {
+        System.out.println(choice);
+        this.choice = choice;
+    }
     public List<Author> getAuthors() {
         return authorFacade.findAll();
     }
@@ -29,12 +38,15 @@ public class AuthorBean implements Serializable {
         try {
             Connection conn = (Connection) DriverManager
                     .getConnection("jdbc:mysql://localhost/books_orm", "root", "");
-            String sql = "SELECT name FROM author WHERE name LIKE %?%";
+            String sql = "SELECT name FROM author WHERE name LIKE '%"+key_word+"%'";
             PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
-            stmt.setString(1, key_word);
+            
+            System.out.println(stmt);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                choices.add(rs.getString("name"));
+                String auth = rs.getString("name");
+                System.out.println(auth);
+                choices.add(auth);
 
             }
             conn.close();

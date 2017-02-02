@@ -8,45 +8,47 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <p:layoutUnit position="west" size="100px" resizable="true" collapsible="true">
-            <h:form>
-                <h:dataTable value="#{bookBean.books}" var="book">
-                    <h:column>
-                        <f:facet name="header">Namn</f:facet>
-                            #{book.name}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Pris</f:facet>
-                            #{book.price}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Författare</f:facet>
-                            #{book.author.name}
-                    </h:column>
-                </h:dataTable>
-            </h:form>
-        </p:layoutUnit>
-        <p:layoutUnit position="east" size="100px" resizable="true" collapsible="true">
-            <p:panel toggleable="true" header="Add Book" collapsed="false">
-                <h2>Lägg till en bok</h2>
+        <p:layout>
+            <p:layoutUnit header="Böcker" position="north" size="150" resizable="true" collapsible="true">
                 <h:form>
-                    <h:panelGrid columns="2">
-                        <h:outputLabel value="Namn" for="name"/>
-                        <h:inputText value="#{bookBean.name}" id="name"></h:inputText>
-                        <h:outputLabel value="Pris" for="price"/>
-                        <h:inputText value="#{bookBean.price}" id="price"></h:inputText>
-                        <h:outputLabel value="Förfatare" for="author"/>
-                        <h:selectOneMenu value="#{bookBean.auth_id}" id="author">
-                            <f:selectItems value="#{authorBean.authors}" var="author"
-                                           itemLabel="#{author.name}" itemValue="#{author.id}"/>
-
-                        </h:selectOneMenu>
-                        <h:panelGroup />
-                        <h:commandButton action="#{bookBean.saveBook()}" value="Spara bok"/>
-                    </h:panelGrid>
+                    <h:dataTable value="#{bookBean.books}" var="book">
+                        <h:column>
+                            <f:facet name="header">Namn</f:facet>
+                                #{book.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Pris</f:facet>
+                                #{book.price}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Författare</f:facet>
+                                #{book.author.name}
+                        </h:column>
+                    </h:dataTable>
                 </h:form>
-            </p:panel>
-        </p:layoutUnit>
+            </p:layoutUnit>
+            <p:layoutUnit position="center" size="100px" resizable="true" collapsible="true">
+                <p:panel toggleable="true" header="Add Book" collapsed="false">
+                    <h2>Lägg till en bok</h2>
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Namn" for="name"/>
+                            <h:inputText value="#{bookBean.name}" id="name"></h:inputText>
+                            <h:outputLabel value="Pris" for="price"/>
+                            <h:inputText value="#{bookBean.price}" id="price"></h:inputText>
+                            <p:outputLabel value="Förfatare" for="author"/>
+                            <p:selectOneMenu value="#{bookBean.auth_id}" id="author">
+                                <f:selectItems value="#{authorBean.authors}" var="author"
+                                               itemLabel="#{author.name}" itemValue="#{author.id}"/>
+
+                            </p:selectOneMenu>
+                            <h:panelGroup />
+                            <h:commandButton action="#{bookBean.saveBook()}" value="Spara bok"/>
+                        </h:panelGrid>
+                    </h:form>
+                </p:panel>
+            </p:layoutUnit>
+        </p:layout>
         <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
     </h:body>
 </html>
